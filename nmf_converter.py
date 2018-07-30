@@ -1,4 +1,4 @@
-''' Python nmf to wav converter. A structure of nmf file was obtained by
+''' Python3 nmf to wav converter. A structure of nmf file was obtained by
 Nice Audio Player decompilation. Using a struct module the script finds raw
 audio data and push it through a pipe to ffmpeg.
 Usage:
@@ -8,9 +8,10 @@ import os
 import sys
 import struct
 import subprocess
+import glob
 
 __author__ = "Dmitry Misharov"
-__credits__ = "Kirill Yagin"
+__credits__ = "Kirill Yagin, Shail Shetye"
 __email__ = "dmitry.misharov@gmail.com"
 __version__ = "0.1"
 
@@ -115,9 +116,10 @@ def convert_to_wav(path_to_file):
         processes[key].wait()
 
 
-if __name__ == "__main__":
+
+for filename in glob.glob('*.nmf'):
     try:
         path_to_file = sys.argv[1]
-        convert_to_wav(path_to_file)
+        convert_to_wav(filename)
     except IndexError:
         sys.exit("Please specify path to nmf file")
